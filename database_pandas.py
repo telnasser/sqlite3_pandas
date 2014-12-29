@@ -1,6 +1,11 @@
 import sqlite3 as lite
 import pandas as pd
+import sys 
 
+if len(sys.argv) >= 2:
+  selected_month = sys.argv[1]
+else:
+  selected_month = 'July'
 
 cities = (('New York City', 'NY'),('Boston', 'MA'),
     ('Chicago', 'IL'),    ('Miami', 'FL'),
@@ -42,7 +47,8 @@ with con:
   cols = [desc[0] for desc in cur.description]
 
   df = pd.DataFrame(rows, columns=cols)
-  list_value = ['July']
+  #list_value = ['July']
+  list_value = [selected_month]
  
   warmest_cities =  df[df['warm_month'].isin(list_value)]
 	
